@@ -6,26 +6,27 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/PyDAQmx-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/PyDAQmx-{{ version }}.tar.gz
   sha256: c236a1abc8aeba24ebf20a662b2dcb16c797cc1dbe37e120d6352f74804da8f9
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=2.7
+    - python {{ python_min }}
     - pip
   run:
-    - python >=2.7
+    - python >={{ python_min }}
 
 test:
   commands:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: http://pythonhosted.org/PyDAQmx/
